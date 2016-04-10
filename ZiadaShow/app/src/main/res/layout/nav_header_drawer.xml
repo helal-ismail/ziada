@@ -7,7 +7,7 @@
               android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
 
-    <com.trianglz.ziadashow.CircleImageView
+    <com.trianglz.ziadashow.util.CircleImageView
         android:layout_width="160dp"
         android:layout_height="160dp"
         android:layout_centerInParent="true"

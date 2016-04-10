@@ -1,4 +1,4 @@
-package com.trianglz.ziadashow;
+package com.trianglz.ziadashow.api;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -6,11 +6,13 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.view.View;
 import android.view.Window;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
+
+import com.trianglz.ziadashow.R;
+import com.trianglz.ziadashow.ui.LoginActivity;
 
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -25,7 +27,7 @@ import twitter4j.auth.RequestToken;
 
 public class GetTwitterTokenTask extends AsyncTask<String, Void, String> {
 
-    private LoginActivity activity;
+    public LoginActivity activity;
     private String oauthURL, verifier;
     private Dialog dialog;
     private WebView webView;
@@ -38,11 +40,12 @@ public class GetTwitterTokenTask extends AsyncTask<String, Void, String> {
     private static final String TWITTER_CONSUMER_KEY = "VWqGIoLcmSaNP2Trba7Qq0Kpg";
     private static final String TWITTER_CONSUMER_SECRET = "uUGRtStvPC9QkSC57ErLkKQqCPEoTRAbdJ0W0RPVq57AIJAymL";
 
-    public GetTwitterTokenTask(View.OnClickListener activity) {
-        this.activity = (LoginActivity) activity;
+    public GetTwitterTokenTask(LoginActivity activity) {
+        this.activity =  activity;
         twitter = new TwitterFactory().getInstance();
         twitter.setOAuthConsumer(TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET);
     }
+
 
     @Override
     protected void onPreExecute() {

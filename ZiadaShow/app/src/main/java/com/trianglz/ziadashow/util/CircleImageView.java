@@ -1,4 +1,4 @@
-package com.trianglz.ziadashow;
+package com.trianglz.ziadashow.util;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -20,6 +20,8 @@ import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.util.AttributeSet;
 import android.widget.ImageView;
+
+import com.trianglz.ziadashow.R;
 
 /**
  * Created by mostafa on 31/03/16.

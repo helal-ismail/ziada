@@ -1,4 +1,4 @@
-package com.trianglz.ziadashow;
+package com.trianglz.ziadashow.core;
 
 public class AppConstants {
 

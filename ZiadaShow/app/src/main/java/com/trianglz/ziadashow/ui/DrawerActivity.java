@@ -1,50 +1,54 @@
-package com.trianglz.ziadashow;
+package com.trianglz.ziadashow.ui;
 
-import android.app.Activity;
-import android.app.FragmentManager;
-import android.app.ListActivity;
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.Intent;
-import android.content.res.Configuration;
-import android.content.res.Resources;
-import android.os.AsyncTask;
-
-import android.os.PersistableBundle;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.os.AsyncTask;
+
+import android.util.Log;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.app.Fragment;
+
+import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
+import com.facebook.login.LoginManager;
+import com.squareup.picasso.Picasso;
+import com.trianglz.ziadashow.core.AppConstants;
+import com.trianglz.ziadashow.util.CustomAdapter;
+import com.trianglz.ziadashow.R;
+import com.trianglz.ziadashow.util.SongItem;
+
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.zip.Inflater;
 
-public class MasterActivity extends AppCompatActivity {
+public class DrawerActivity extends ParentActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
     ArrayList<SongItem> Data;
     ListView lv;
     Context context;
@@ -57,17 +61,19 @@ public class MasterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_master);
-
-
+        setContentView(R.layout.activity_drawer);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         context = this;
         Data = new ArrayList<>();
         lv = (ListView) findViewById(R.id.list);
-      //  adapter = new CustomAdapter(this, songList);
+        adapter = new CustomAdapter(this, songList);
         lv.setAdapter(adapter);
 
 
-
+        SharedPreferences sharedPref = getSharedPreferences(AppConstants.MyPREFERENCES, Context.MODE_PRIVATE);
+        String picValue = sharedPref.getString(AppConstants.ProfPic, "");
+        String nameValue = sharedPref.getString(AppConstants.profname, "");
 
 
         GetSongs player = new GetSongs();
@@ -78,8 +84,144 @@ public class MasterActivity extends AppCompatActivity {
         pDialog.show();
 
 
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+      //  View headerLayout = navigationView.getHeaderView(0);
+
+        View headerLayout = navigationView.inflateHeaderView(R.layout.nav_header_drawer);
+
+        Button bb=(Button)headerLayout.findViewById(R.id.logouttwitt);
+        bb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                disconnectFromFacebook();
+                SharedPreferences sharedPref = getSharedPreferences(AppConstants.MyPREFERENCES, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putBoolean(AppConstants.IS_LOGIN, false);
+                editor.commit();
+                logout();
+            }
+        });
+
+        ImageView  imag =(ImageView) headerLayout.findViewById(R.id.profpic);
+        Picasso.with(this).load(picValue).into(imag);
+
+        TextView tss=(TextView) headerLayout.findViewById(R.id.username);
+        tss.setText(nameValue);
+
     }
 
+
+//    public void logouttwitter(){
+//
+//        CookieSyncManager.createInstance(this);
+//        CookieManager cookieManager = CookieManager.getInstance();
+//        cookieManager.removeSessionCookie();
+//        Twitter.getSessionManager().clearActiveSession();
+//        Twitter.logOut();
+//
+//
+//    }
+
+    public void disconnectFromFacebook() {
+
+        if (AccessToken.getCurrentAccessToken() == null) {
+            return; // already logged out
+        }
+
+        new GraphRequest(AccessToken.getCurrentAccessToken(), "/me/permissions/", null, HttpMethod.DELETE, new GraphRequest
+                .Callback() {
+            @Override
+            public void onCompleted(GraphResponse graphResponse) {
+
+                LoginManager.getInstance().logOut();
+
+            }
+        }).executeAsync();
+    }
+
+
+
+
+
+
+
+
+    public void logout(){
+
+
+        Intent is=new Intent(this,LoginActivity.class);
+        startActivity(is);
+//        SharedPreferences sharedPref = getSharedPreferences(AppConstants.MyPREFERENCES, Context.MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sharedPref.edit();
+//        editor.clear();
+//        editor.commit();
+
+    }
+
+
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.drawer, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.nav_camera) {
+            // Handle the camera action
+        } else if (id == R.id.nav_gallery) {
+
+        } else if (id == R.id.nav_slideshow) {
+
+        } else if (id == R.id.nav_manage) {
+
+
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
 
     private void getDataFromJson(String songsJsonStr)
             throws JSONException {
@@ -232,37 +374,37 @@ public class MasterActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Boolean result) {
-if (result=true){
+            if (result=true){
 
-    lv = (ListView) findViewById(R.id.list);
-    lv.setAdapter(adapter);
-    lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                lv = (ListView) findViewById(R.id.list);
+                lv.setAdapter(adapter);
+                lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-                                  @Override
-                                  public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                              @Override
+                                              public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                                      Intent myIntent = new Intent(MasterActivity.this,DetailsActivity.class);
-                                      String SongItem = Data.get(position).getTitle();
-                                      String SongItem1 = Data.get(position).getArtist();
-                                      String SongItem2 = Data.get(position).getImage();
-                                      String SongItem3= Data.get(position).getList();
+                                                  Intent myIntent = new Intent(DrawerActivity.this,DetailsActivity.class);
+                                                  String SongItem = Data.get(position).getTitle();
+                                                  String SongItem1 = Data.get(position).getArtist();
+                                                  String SongItem2 = Data.get(position).getImage();
+                                                  String SongItem3= Data.get(position).getList();
 
-                                      myIntent.putExtra("title", SongItem);
-                                      myIntent.putExtra("artist", SongItem1);
-                                      myIntent.putExtra("image", SongItem2);
-                                      myIntent.putExtra("playlist",SongItem3);
-                                      startActivity(myIntent);
-
-
-
-
-                                  }
-                          }
-);
+                                                  myIntent.putExtra("title", SongItem);
+                                                  myIntent.putExtra("artist", SongItem1);
+                                                  myIntent.putExtra("image", SongItem2);
+                                                  myIntent.putExtra("playlist",SongItem3);
+                                                  startActivity(myIntent);
 
 
 
-}
+
+                                              }
+                                          }
+                );
+
+
+
+            }
 
         }
 
@@ -277,7 +419,6 @@ if (result=true){
             try {
 
                 URL url = new URL("http://www.bbc.co.uk/radio2/playlist.json");
-
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("GET");
                 urlConnection.connect();
@@ -317,13 +458,10 @@ if (result=true){
                 return result;
             } catch (JSONException e) {
 
-
                 Log.e("ayyyyyyyy", e.getMessage(), e);
                 e.getStackTrace();
             }
-
             return result;
-
         }
     }
 
@@ -339,8 +477,4 @@ if (result=true){
             pDialog = null;
         }
     }
-
-
-
-
 }

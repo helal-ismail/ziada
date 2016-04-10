@@ -1,4 +1,4 @@
-package com.trianglz.ziadashow;
+package com.trianglz.ziadashow.ui;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,8 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+import com.trianglz.ziadashow.R;
 
-public class DetailsActivity extends AppCompatActivity {
+public class DetailsActivity extends ParentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

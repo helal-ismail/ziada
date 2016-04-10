@@ -1,32 +1,18 @@
-package com.trianglz.ziadashow;
+package com.trianglz.ziadashow.ui;
 
-import android.app.LoaderManager;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentSender;
-import android.content.Loader;
 import android.content.SharedPreferences;
 
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.preference.PreferenceManager;
-import android.provider.SyncStateContract;
-import android.service.media.MediaBrowserService;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -37,28 +23,21 @@ import com.facebook.HttpMethod;
 import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-
+import com.trianglz.ziadashow.api.GetTwitterTokenTask;
+import com.trianglz.ziadashow.R;
+import com.trianglz.ziadashow.core.AppConstants;
 
 
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-
-
 
 
 import twitter4j.User;
-import twitter4j.auth.RequestToken;
-import twitter4j.conf.Configuration;
-import twitter4j.conf.ConfigurationBuilder;
-public class LoginActivity extends FragmentActivity
-         {
+
+public class LoginActivity extends FragmentActivity  {
 
 
     private CallbackManager callbackManager;
@@ -87,10 +66,9 @@ Button twitt=(Button)findViewById(R.id.btn_login_tw);
             @Override
             public void onClick(View v) {
 
-                new GetTwitterTokenTask(this).execute();
+                new GetTwitterTokenTask(LoginActivity.this).execute();
             }
         });
-
 
 
 
@@ -226,5 +204,6 @@ Button twitt=(Button)findViewById(R.id.btn_login_tw);
         Bitmap bitmap = BitmapFactory.decodeStream(facebookProfileURL.openConnection().getInputStream());
         return bitmap;
     }
+
 
 }
