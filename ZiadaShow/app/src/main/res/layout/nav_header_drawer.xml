@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="fill_parent"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:background="@drawable/side_nav_bar"
+              android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+
+    <com.trianglz.ziadashow.CircleImageView
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_centerInParent="true"
+        app:civ_border_width="1dp"
+        android:id="@+id/profpic"
+        android:paddingLeft="20dp"
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:layout_below="@+id/profpic"
+        android:id="@+id/username"
+        android:layout_marginTop="260dp"
+
+        />
+
+
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/logouttwitt"
+        android:text="Log Out"
+        />
+</RelativeLayout>
