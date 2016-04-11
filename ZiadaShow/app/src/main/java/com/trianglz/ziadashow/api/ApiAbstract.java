@@ -5,10 +5,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
-
-import com.trianglz.ziadashow.ui.ParentActivity;
 import com.trianglz.ziadashow.util.SongItem;
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -24,10 +21,6 @@ public abstract class ApiAbstract extends AsyncTask<Void, Void, String>{
     String dialogText;
     boolean showDialog;
     ProgressDialog pDialog;
-
-
-
-
 
     public ApiAbstract(Context mContext){
         this.mContext = mContext;

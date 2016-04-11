@@ -19,11 +19,6 @@ public class CustomAdapter extends BaseAdapter{
     private List<SongItem> songItems;
     private static LayoutInflater inflater=null;
 
-
-
-
-
-
     public CustomAdapter(DrawerActivity activity, List<SongItem> songItems) {
         this.activity = activity;
         this.songItems = songItems;

@@ -10,20 +10,13 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
-
-import android.util.Log;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
-
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
@@ -32,29 +25,11 @@ import com.facebook.login.LoginManager;
 import com.squareup.picasso.Picasso;
 import com.trianglz.ziadashow.api.GetSongsTask;
 import com.trianglz.ziadashow.core.AppConstants;
-import com.trianglz.ziadashow.util.CustomAdapter;
 import com.trianglz.ziadashow.R;
-import com.trianglz.ziadashow.util.SongItem;
 
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-
-import twitter4j.Twitter;
 
 public class DrawerActivity extends ParentActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,12 +42,8 @@ public class DrawerActivity extends ParentActivity
         String picValue =sharedPref.getString(AppConstants.ProfPic, "");
         String nameValue = sharedPref.getString(AppConstants.profname, "");
 
-
         GetSongsTask getSongsTask = new GetSongsTask(this);
         getSongsTask.execute();
-
-
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -82,15 +53,12 @@ public class DrawerActivity extends ParentActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-      //  View headerLayout = navigationView.getHeaderView(0);
-
         View headerLayout = navigationView.inflateHeaderView(R.layout.nav_header_drawer);
 
         Button bb=(Button)headerLayout.findViewById(R.id.logouttwitt);
         bb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 disconnectFromFacebook();
                 logouttwitter();
                 SharedPreferences sharedPref = getSharedPreferences(AppConstants.MyPREFERENCES, Context.MODE_PRIVATE);
@@ -106,16 +74,13 @@ public class DrawerActivity extends ParentActivity
 
         TextView tss=(TextView) headerLayout.findViewById(R.id.username);
         tss.setText(nameValue);
-
     }
-
 
     public void logouttwitter(){
 
         CookieSyncManager.createInstance(this);
         CookieManager cookieManager = CookieManager.getInstance();
         cookieManager.removeSessionCookie();
-
 
     }
 
@@ -136,23 +101,11 @@ public class DrawerActivity extends ParentActivity
         }).executeAsync();
     }
 
-
-
-
-
-
-
-
     public void logout(){
 
 
         Intent is=new Intent(this,LoginActivity.class);
         startActivity(is);
-//        SharedPreferences sharedPref = getSharedPreferences(AppConstants.MyPREFERENCES, Context.MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sharedPref.edit();
-//        editor.clear();
-//        editor.commit();
-
     }
 
 
@@ -169,16 +122,12 @@ public class DrawerActivity extends ParentActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.drawer, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement

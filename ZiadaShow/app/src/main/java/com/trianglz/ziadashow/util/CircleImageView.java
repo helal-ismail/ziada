@@ -23,9 +23,6 @@ import android.widget.ImageView;
 
 import com.trianglz.ziadashow.R;
 
-/**
- * Created by mostafa on 31/03/16.
- */
 public class CircleImageView extends ImageView {
     private static final ScaleType SCALE_TYPE = ScaleType.CENTER_CROP;
 

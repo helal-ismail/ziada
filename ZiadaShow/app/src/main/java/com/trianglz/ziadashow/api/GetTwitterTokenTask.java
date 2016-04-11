@@ -11,11 +11,9 @@ import android.view.Window;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
-
 import com.trianglz.ziadashow.R;
 import com.trianglz.ziadashow.ui.DrawerActivity;
 import com.trianglz.ziadashow.ui.LoginActivity;
-
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;

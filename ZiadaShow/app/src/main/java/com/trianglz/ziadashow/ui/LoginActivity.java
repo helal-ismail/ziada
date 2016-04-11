@@ -3,16 +3,12 @@ package com.trianglz.ziadashow.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
-
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -26,24 +22,13 @@ import com.facebook.login.LoginResult;
 import com.trianglz.ziadashow.api.GetTwitterTokenTask;
 import com.trianglz.ziadashow.R;
 import com.trianglz.ziadashow.core.AppConstants;
-
-
 import org.json.JSONObject;
-
-import java.io.IOException;
-import java.net.URL;
 import java.util.Arrays;
-
-
 import twitter4j.User;
-
 public class LoginActivity extends FragmentActivity  {
 
 
     private CallbackManager callbackManager;
-    private static final String TWITTER_KEY = "VWqGIoLcmSaNP2Trba7Qq0Kpg";
-    private static final String TWITTER_SECRET = "uUGRtStvPC9QkSC57ErLkKQqCPEoTRAbdJ0W0RPVq57AIJAymL";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,9 +44,7 @@ public class LoginActivity extends FragmentActivity  {
                       successs();
         }
 
-
-Button twitt=(Button)findViewById(R.id.btn_login_tw);
-
+        Button twitt=(Button)findViewById(R.id.btn_login_tw);
         twitt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

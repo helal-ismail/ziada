@@ -2,28 +2,18 @@ package com.trianglz.ziadashow.api;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-
 import com.trianglz.ziadashow.R;
 import com.trianglz.ziadashow.ui.DetailsActivity;
 import com.trianglz.ziadashow.ui.DrawerActivity;
 import com.trianglz.ziadashow.ui.ParentActivity;
 import com.trianglz.ziadashow.util.CustomAdapter;
 import com.trianglz.ziadashow.util.SongItem;
-
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 
 public class GetSongsTask extends ApiAbstract {
