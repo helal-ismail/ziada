@@ -49,10 +49,6 @@ import java.util.List;
 
 public class DrawerActivity extends ParentActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    ArrayList<SongItem> data;
-    ListView lv;
-    private List<SongItem> songList = new ArrayList<SongItem>();
-    private ProgressDialog pDialog;
 
 
 
@@ -62,8 +58,6 @@ public class DrawerActivity extends ParentActivity
         setContentView(R.layout.activity_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //data = new ArrayList<>();
-        //lv = (ListView) findViewById(R.id.list);
 
 
         String picValue = "";
@@ -194,29 +188,6 @@ public class DrawerActivity extends ParentActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
-
-
 
 
     @Override
@@ -225,10 +196,5 @@ public class DrawerActivity extends ParentActivity
         hidePDialog();
     }
 
-    private void hidePDialog() {
-        if (pDialog != null) {
-            pDialog.dismiss();
-            pDialog = null;
-        }
-    }
+
 }
