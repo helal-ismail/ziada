@@ -2,6 +2,7 @@ package com.trianglz.ziadashow.api;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -12,6 +13,7 @@ import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import com.trianglz.ziadashow.R;
+import com.trianglz.ziadashow.ui.DrawerActivity;
 import com.trianglz.ziadashow.ui.LoginActivity;
 
 import twitter4j.Twitter;
@@ -152,8 +154,11 @@ public class GetTwitterTokenTask extends AsyncTask<String, Void, String> {
             } else {
                 //call back data to UI here
                 activity.callBackDataFromAsyncTask(response);
+
             }
             progressBar.dismiss();
+            Intent i =new Intent(activity,DrawerActivity.class);
+            activity.startActivity(i);
         }
 
     }

@@ -158,6 +158,16 @@ Button twitt=(Button)findViewById(R.id.btn_login_tw);
         });
 
 
+        Button twitt=(Button)findViewById(R.id.btn_login_tw);
+        twitt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                new GetTwitterTokenTask(LoginActivity.this).execute();
+            }
+        });
+
+
 
     }
 

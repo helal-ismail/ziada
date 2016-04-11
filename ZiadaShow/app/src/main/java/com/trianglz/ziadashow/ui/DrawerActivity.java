@@ -16,6 +16,8 @@ import android.content.Intent;
 import android.os.AsyncTask;
 
 import android.util.Log;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -46,6 +48,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import twitter4j.Twitter;
 
 public class DrawerActivity extends ParentActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -88,6 +92,7 @@ public class DrawerActivity extends ParentActivity
             public void onClick(View v) {
 
                 disconnectFromFacebook();
+                logouttwitter();
                 SharedPreferences sharedPref = getSharedPreferences(AppConstants.MyPREFERENCES, Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putBoolean(AppConstants.IS_LOGIN, false);
@@ -105,16 +110,14 @@ public class DrawerActivity extends ParentActivity
     }
 
 
-//    public void logouttwitter(){
-//
-//        CookieSyncManager.createInstance(this);
-//        CookieManager cookieManager = CookieManager.getInstance();
-//        cookieManager.removeSessionCookie();
-//        Twitter.getSessionManager().clearActiveSession();
-//        Twitter.logOut();
-//
-//
-//    }
+    public void logouttwitter(){
+
+        CookieSyncManager.createInstance(this);
+        CookieManager cookieManager = CookieManager.getInstance();
+        cookieManager.removeSessionCookie();
+
+
+    }
 
     public void disconnectFromFacebook() {
 
@@ -191,8 +194,12 @@ public class DrawerActivity extends ParentActivity
     @Override
     public void onDestroy() {
         super.onDestroy();
-        hidePDialog();
+
     }
 
 
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        return false;
+    }
 }
