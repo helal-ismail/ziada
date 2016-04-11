@@ -2,7 +2,9 @@ package com.trianglz.ziadashow.api;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -12,6 +14,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 import com.trianglz.ziadashow.R;
+import com.trianglz.ziadashow.core.AppConstants;
 import com.trianglz.ziadashow.ui.DrawerActivity;
 import com.trianglz.ziadashow.ui.LoginActivity;
 import twitter4j.Twitter;
@@ -118,9 +121,6 @@ public class GetTwitterTokenTask extends AsyncTask<String, Void, String> {
 
 
     public class AccessTokenGetTask extends AsyncTask<String, String, User > {
-
-
-
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -149,14 +149,25 @@ public class GetTwitterTokenTask extends AsyncTask<String, Void, String> {
                 Log.e("AsyncTask", "null user");
             } else {
                 //call back data to UI here
-                activity.callBackDataFromAsyncTask(response);
+                callBackDataFromAsyncTask(response);
 
             }
             progressBar.dismiss();
             Intent i =new Intent(activity,DrawerActivity.class);
             activity.startActivity(i);
         }
+    }
 
+
+    private void callBackDataFromAsyncTask(User user) {
+        String vacao=user.getBiggerProfileImageURL();
+        String userName=user.getName();
+        SharedPreferences sharedPref = activity.getSharedPreferences(AppConstants.MyPREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+                 editor.putString(AppConstants.profname, userName);
+                 editor.putString(AppConstants.ProfPic, vacao);
+                 editor.putBoolean(AppConstants.IS_LOGIN, true);
+                 editor.commit();
     }
 
 }
