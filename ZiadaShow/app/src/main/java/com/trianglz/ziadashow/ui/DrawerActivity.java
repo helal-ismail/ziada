@@ -106,6 +106,7 @@ public class DrawerActivity extends ParentActivity
 
         Intent is=new Intent(this,LoginActivity.class);
         startActivity(is);
+        finish();
     }
 
 

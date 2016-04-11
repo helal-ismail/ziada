@@ -1,5 +1,6 @@
 package com.trianglz.ziadashow.helpers;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
@@ -14,6 +15,7 @@ public abstract class SocialNetworkHelper{
     public static void successs(){
         Intent intent =new Intent(mContext,DrawerActivity.class);
         mContext.startActivity(intent);
+        ((Activity)mContext).finish();
     }
 
 
