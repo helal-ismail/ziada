@@ -6,9 +6,7 @@ import android.os.Handler;
 import android.os.Bundle;
 
 import com.trianglz.ziadashow.R;
-import com.twitter.sdk.android.Twitter;
-import com.twitter.sdk.android.core.TwitterAuthConfig;
-import io.fabric.sdk.android.Fabric;
+
 
 
 public class SplashActivity extends ParentActivity {
@@ -28,8 +26,7 @@ public class SplashActivity extends ParentActivity {
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
-        Fabric.with(this, new Twitter(authConfig));
+
 //        TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
 //        Fabric.with(this, new Twitter(authConfig));
 

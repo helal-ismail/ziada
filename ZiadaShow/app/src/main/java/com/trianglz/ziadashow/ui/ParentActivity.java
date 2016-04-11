@@ -1,6 +1,7 @@
 package com.trianglz.ziadashow.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -22,4 +23,5 @@ public class ParentActivity extends AppCompatActivity{
         sharedPref = getSharedPreferences(AppConstants.MyPREFERENCES, Context.MODE_PRIVATE);
 
     }
+
 }

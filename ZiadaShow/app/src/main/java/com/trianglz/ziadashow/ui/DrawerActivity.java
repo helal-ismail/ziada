@@ -62,14 +62,10 @@ public class DrawerActivity extends ParentActivity
         setContentView(R.layout.activity_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //data = new ArrayList<>();
-        //lv = (ListView) findViewById(R.id.list);
 
-
-        String picValue = "";
-               // sharedPref.getString(AppConstants.ProfPic, "");
-        String nameValue ="";
-//                sharedPref.getString(AppConstants.profname, "");
+        sharedPref = getSharedPreferences(AppConstants.MyPREFERENCES, Context.MODE_PRIVATE);
+        String picValue =sharedPref.getString(AppConstants.ProfPic, "");
+        String nameValue = sharedPref.getString(AppConstants.profname, "");
 
 
         GetSongsTask getSongsTask = new GetSongsTask(this);
@@ -105,7 +101,7 @@ public class DrawerActivity extends ParentActivity
         });
 
         ImageView  imag =(ImageView) headerLayout.findViewById(R.id.profpic);
-//        Picasso.with(this).load(picValue).into(imag);
+       Picasso.with(this).load(picValue).into(imag);
 
         TextView tss=(TextView) headerLayout.findViewById(R.id.username);
         tss.setText(nameValue);

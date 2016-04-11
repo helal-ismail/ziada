@@ -123,7 +123,7 @@ Button twitt=(Button)findViewById(R.id.btn_login_tw);
                                 }
                             }
                         }).executeAsync();
-
+                successs();
             }
 
             @Override
@@ -138,7 +138,7 @@ Button twitt=(Button)findViewById(R.id.btn_login_tw);
         });
 
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        successs();
+
     }
 
 
@@ -167,13 +167,14 @@ Button twitt=(Button)findViewById(R.id.btn_login_tw);
 
 
              public void callBackDataFromAsyncTask(User user) {
-//                 userId.setText(String.valueOf(user.getId()));
-//                 userName.setText(user.getName());
-//                 dataLayout.setVisibility(View.VISIBLE);
-//                 btnLoginTwitter.setVisibility(View.GONE);
-
-                 //loading User Avatar by Picasso
-
+                String vacao=user.getBiggerProfileImageURL();
+                 String userName=user.getName();
+                 SharedPreferences sharedPref = getSharedPreferences(AppConstants.MyPREFERENCES, Context.MODE_PRIVATE);
+                 SharedPreferences.Editor editor = sharedPref.edit();
+                 editor.putString(AppConstants.profname, userName);
+                 editor.putString(AppConstants.ProfPic, vacao);
+                 editor.putBoolean(AppConstants.IS_LOGIN, true);
+                 editor.commit();
              }
 
 
