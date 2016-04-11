@@ -45,7 +45,7 @@ public class FacebookHelper extends SocialNetworkHelper {
         facebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                initfb();
+                initFb();
             }
         });
     }
@@ -54,7 +54,7 @@ public class FacebookHelper extends SocialNetworkHelper {
         return callBackManager;
     }
 
-    private void initfb(){
+    private void initFb(){
         callBackManager = CallbackManager.Factory.create();
         LoginManager.getInstance().logInWithReadPermissions((Activity)mContext, Arrays.asList("public_profile", "user_friends"));
         LoginManager.getInstance().registerCallback(callBackManager, new FacebookCallback<LoginResult>() {
@@ -90,7 +90,7 @@ public class FacebookHelper extends SocialNetworkHelper {
                                 }
                             }
                         }).executeAsync();
-                //successs();
+                successs();
             }
 
             @Override
