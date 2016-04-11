@@ -28,13 +28,12 @@
 
         />
 
-
-
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/logouttwitt"
         android:text="Log Out"
+        android:layout_below="@+id/username"
+        android:layout_centerHorizontal="true"
         />
 </RelativeLayout>

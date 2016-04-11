@@ -23,9 +23,7 @@ import twitter4j.User;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 
-/**
- * Created by mostafa on 05/04/16.
- */
+
 
 public class GetTwitterTokenTask extends AsyncTask<String, Void, String> {
 

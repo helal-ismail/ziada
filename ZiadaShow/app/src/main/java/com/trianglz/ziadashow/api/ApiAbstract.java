@@ -16,9 +16,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-/**
- * Created by mostafa on 10/04/16.
- */
 public abstract class ApiAbstract extends AsyncTask<Void, Void, String>{
 
     Context mContext;

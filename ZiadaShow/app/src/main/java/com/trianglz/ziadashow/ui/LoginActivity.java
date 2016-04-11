@@ -70,9 +70,6 @@ Button twitt=(Button)findViewById(R.id.btn_login_tw);
             }
         });
 
-
-
-
         facebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,10 +78,7 @@ Button twitt=(Button)findViewById(R.id.btn_login_tw);
             }
         });
 
-
-
     }
-
 
     private void initfb(){
 
@@ -141,9 +135,6 @@ Button twitt=(Button)findViewById(R.id.btn_login_tw);
 
     }
 
-
-
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -166,15 +157,7 @@ Button twitt=(Button)findViewById(R.id.btn_login_tw);
                 new GetTwitterTokenTask(LoginActivity.this).execute();
             }
         });
-
-
-
     }
-
-
-
-
-
 
              public void callBackDataFromAsyncTask(User user) {
                 String vacao=user.getBiggerProfileImageURL();
@@ -186,14 +169,6 @@ Button twitt=(Button)findViewById(R.id.btn_login_tw);
                  editor.putBoolean(AppConstants.IS_LOGIN, true);
                  editor.commit();
              }
-
-
-
-
-
-
-
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -208,12 +183,6 @@ Button twitt=(Button)findViewById(R.id.btn_login_tw);
         Intent i =new Intent(this,DrawerActivity.class);
         startActivity(i);
 
-    }
-
-    public static Bitmap getFacebookProfilePicture(String url) throws IOException {
-        URL facebookProfileURL= new URL(url);
-        Bitmap bitmap = BitmapFactory.decodeStream(facebookProfileURL.openConnection().getInputStream());
-        return bitmap;
     }
 
 
