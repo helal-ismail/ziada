@@ -17,6 +17,4 @@ public abstract class SocialNetworkHelper{
         mContext.startActivity(intent);
         ((Activity)mContext).finish();
     }
-
-
 }

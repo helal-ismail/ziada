@@ -39,10 +39,10 @@ public class GetSongsTask extends ApiAbstract {
                                       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                                           Intent myIntent = new Intent(mContext, DetailsActivity.class);
-                                          String SongItem = data.get(position).getTitle();
-                                          String SongItem1 = data.get(position).getArtist();
-                                          String SongItem2 = data.get(position).getImage();
-                                          String SongItem3 = data.get(position).getList();
+                                          String SongItem = data.get(position).title;
+                                          String SongItem1 = data.get(position).artist;
+                                          String SongItem2 = data.get(position).image;
+                                          String SongItem3 = data.get(position).playlist;
 
                                           myIntent.putExtra("title", SongItem);
                                           myIntent.putExtra("artist", SongItem1);
@@ -73,10 +73,12 @@ public class GetSongsTask extends ApiAbstract {
                 for (int i = 0; i < resultsArray.length(); i++) {
                     JSONObject songs = resultsArray.getJSONObject(i);
                     SongItem item = new SongItem();
-                    item.setTitle(songs.getString(TITLE));
-                    item.setArtist(songs.getString(ARTIST));
-                    item.setImage(songs.getString(IMAGE));
-                    item.setList(songs.getString(List));
+
+                    item.title = songs.getString(TITLE);
+                    item.artist = songs.getString(ARTIST);
+                    item.image=songs.getString(IMAGE);
+                    item.playlist=songs.getString(List);
+
                     data.add(item);
                 }
             }

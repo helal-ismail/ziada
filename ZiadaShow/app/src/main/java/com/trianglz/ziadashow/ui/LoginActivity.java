@@ -35,7 +35,10 @@ public class LoginActivity extends FragmentActivity  {
         FacebookHelper.getInstance(this).getCallBackManager().onActivityResult(requestCode, resultCode, data);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
 
 
-
+    }
 }

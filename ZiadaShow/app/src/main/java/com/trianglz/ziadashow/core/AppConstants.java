@@ -8,6 +8,7 @@ public class AppConstants {
     public static final String MyPREFERENCES = "MyPrefs" ;
     public static String profname="user";
     public static final String IS_LOGIN = "false";
+    public static String type="typo";
 
 
 }

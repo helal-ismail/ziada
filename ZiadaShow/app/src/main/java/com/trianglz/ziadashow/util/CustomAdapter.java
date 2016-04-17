@@ -58,10 +58,10 @@ public class CustomAdapter extends BaseAdapter{
         holder = new ViewHolder();
         holder.img = (ImageView) convertView.findViewById(R.id.imageh);
         convertView.setTag(holder);
-        tv.setText(s.getTitle());
-        tv2.setText(s.getArtist());
+        tv.setText(s.title);
+        tv2.setText(s.artist);
 
-        Picasso.with(activity).load(s.getImage()).into(holder.img);
+        Picasso.with(activity).load(s.image).into(holder.img);
 
 
         return convertView;

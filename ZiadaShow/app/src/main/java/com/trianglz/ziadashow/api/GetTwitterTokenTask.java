@@ -167,6 +167,7 @@ public class GetTwitterTokenTask extends AsyncTask<String, Void, String> {
                  editor.putString(AppConstants.profname, userName);
                  editor.putString(AppConstants.ProfPic, vacao);
                  editor.putBoolean(AppConstants.IS_LOGIN, true);
+                 editor.putString(AppConstants.type,"twitter");
                  editor.commit();
     }
 
